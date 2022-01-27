@@ -1,0 +1,24 @@
+.table-title {
+    font-weight: 600;
+    color: white;
+}
+
+.table-title, .table-body {
+    display: grid;
+    grid-template-columns: 40px 40px 40px 40px 40px;
+    text-align: center;
+}
+
+.numbers, .messages {
+    height: 150px;
+    overflow: auto;
+
+    .list {
+        padding-right: 15px;
+    }
+}
+
+.painted {
+    border-radius: 15px;
+    background-color: green;
+}

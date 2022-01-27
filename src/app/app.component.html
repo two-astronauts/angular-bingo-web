@@ -1,0 +1,97 @@
+<tui-theme-night></tui-theme-night>
+<tui-root tuiMode="onDark">
+
+  <router-outlet></router-outlet>
+
+  <div class="tui-container tui-container_adaptive">
+    <div class="tui-row">
+      <h1>Bienvenido al bingo 24/7</h1>
+    </div>
+
+    <div *ngIf="!username" class="tui-row justify-center">
+      <form [formGroup]="form" (keyup.enter)="setName()">
+        <tui-input formControlName="name">
+            Ingresa tu nombre
+        </tui-input>
+      </form>
+    </div>
+
+    <br>
+
+    <div *ngIf="username" class="tui-row justify-center">
+      <div class="tui-col_lg-3 tui-space_right-5">
+        <h4>
+          <tui-svg src="tuiIconUsers" class="icon"></tui-svg>
+          Participantes
+        </h4>
+        <div *ngFor="let name of names">
+          <span>{{ name }}</span>
+        </div>
+      </div>
+
+      <div class="tui-col_lg-3">
+        <tui-island>
+          <h3 class="tui-island__title">
+            {{ username }}
+          </h3>
+          <div class="tui-island__paragraph">
+            <div class="table-title">
+              <div>B</div>
+              <div>I</div>
+              <div>N</div>
+              <div>G</div>
+              <div>O</div>
+            </div>
+            <div class="table-body">
+              <div>
+                <div [class.painted]="number.painted" *ngFor="let number of table.b">{{ number.number }}</div>
+              </div>
+              <div>
+                <div [class.painted]="number.painted" *ngFor="let number of table.i">{{ number.number }}</div>
+              </div>
+              <div>
+                <div [class.painted]="number.painted" *ngFor="let number of table.n">{{ number.number }}</div>
+              </div>
+              <div>
+                <div [class.painted]="number.painted" *ngFor="let number of table.g">{{ number.number }}</div>
+              </div>
+              <div>
+                <div [class.painted]="number.painted" *ngFor="let number of table.o">{{ number.number }}</div>
+              </div>
+            </div>
+          </div>
+        </tui-island>
+      </div>
+
+      <div class="tui-col_lg-3 tui-space_left-5">
+        <h4>
+          <tui-svg src="tuiIconOLLarge" class="icon"></tui-svg>
+          Números
+        </h4>
+        <tui-scrollbar class="numbers" #scrollNumbers>
+          <div class="list">
+            <div *ngFor="let number of numbers">
+              <span>{{ number }}</span>
+            </div>
+          </div>
+        </tui-scrollbar>
+      </div>
+
+      <div class="tui-col_lg-3 tui-space_left-5">
+        <h4>
+          <tui-svg src="tuiIconIndentLarge" class="icon"></tui-svg>
+          Mensajes
+        </h4>
+        <tui-scrollbar class="messages" #scrollMessages>
+          <div class="list">
+            <div *ngFor="let message of messages">
+              <span *ngIf="message.type === 'win'">🎉🎁🎉 {{ message.message }} 🎉🎁🎉</span>
+              <span *ngIf="message.type !== 'win'">{{ message.message }}</span>
+            </div>
+          </div>
+        </tui-scrollbar>
+      </div>
+    </div>
+  </div>
+
+</tui-root>
