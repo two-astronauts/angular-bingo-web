@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { io } from "socket.io-client";
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +15,7 @@ export class BingoService {
 
   constructor() { }
 
-  socket = io('http://localhost:3000');
+  socket = io(environment.server);
 
   public sendMessage(message: String) {
     this.socket.emit('message', message);
